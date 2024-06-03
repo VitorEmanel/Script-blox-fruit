@@ -1,0 +1,32 @@
+-- Blox Fruits Script
+-- Desbloqueia todas as frutas, Haki, maestrias e fornece dinheiro infinito e fragmentos infinitos
+
+-- Desbloqueia todas as frutas
+for _, fruit in pairs(game.Workspace.Fruits:GetChildren()) do
+    fruit.Locked.Value = false
+end
+
+-- Desbloqueia todos os Haki
+for _, player in pairs(game.Players:GetPlayers()) do
+    player.Haki.Value = true
+end
+
+-- Desbloqueia todas as maestrias das frutas
+for _, player in pairs(game.Players:GetPlayers()) do
+    for _, mastery in pairs(player.Mastery:GetChildren()) do
+        mastery.Value = true
+    end
+end
+
+-- Fornece dinheiro infinito e fragmentos infinitos
+local player = game.Players.LocalPlayer
+player.Money.Value = math.huge
+player.Fragments.Value = math.huge
+
+-- Exemplo de uso:
+print("Todas as frutas desbloqueadas!")
+print("Haki ativado para todos os jogadores!")
+print("Todas as maestrias das frutas desbloqueadas!")
+print("Dinheiro e fragmentos infinitos!")
+
+-- Lembre-se de adicionar medidas de segurança para evitar abusos e garantir que o jogo continue divertido para todos os jogadores.
