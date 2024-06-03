@@ -1,0 +1,30 @@
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+
+local function createLine(player)
+    local playerCharacter = player.Character
+    if not playerCharacter then
+        return
+    end
+
+    local playerPosition = playerCharacter.HumanoidRootPart.Position
+    local camera = game.Workspace.CurrentCamera
+
+    local line = Instance.new("LineHandleAdornment")
+    line.Parent = playerCharacter
+    line.Adornee = playerCharacter.HumanoidRootPart
+    line.Length = 10 -- Tamanho da linha (ajuste conforme necessário)
+    line.Thickness = 2
+    line.Transparency = 0.5
+    line.Color3 = Color3.new(1, 0, 0) -- Cor da linha (vermelho)
+
+    RunService.RenderStepped:Connect(function()
+        local screenPosition, onScreen = camera:WorldToScreenPoint(playerPosition)
+        line.Visible = onScreen
+        line.CFrame = CFrame.new(playerPosition, camera:ScreenToWorldPoint(Vector2.new(screenPosition.X, screenPosition.Y)))
+    end)
+end
+
+Players.PlayerAdded:Connect(function(player)
+    createLine(player)
+end)
